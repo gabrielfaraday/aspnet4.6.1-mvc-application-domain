@@ -6,12 +6,13 @@ namespace MvcAppExample.Domain.ValueObjects
     {
         public string Endereco { get; set; }
 
-        public bool Validar()
+        public virtual bool Validar()
         {
-            return Regex.IsMatch(
-                Endereco,
-                @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
-                RegexOptions.IgnoreCase);
+            return Endereco != null &&
+                Regex.IsMatch(
+                    Endereco,
+                    @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
+                    RegexOptions.IgnoreCase);
         }
     }
 }

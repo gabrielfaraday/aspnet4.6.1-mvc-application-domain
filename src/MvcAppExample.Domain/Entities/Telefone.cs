@@ -7,12 +7,9 @@ namespace MvcAppExample.Domain.Entities
 {
     public class Telefone
     {
-        TelefoneEstaConsistenteValidation _telefoneEstaConsistenteValidation;
-
-        public Telefone(TelefoneEstaConsistenteValidation telefoneEstaConsistenteValidation)
+        public Telefone()
         {
             TelefoneId = Guid.NewGuid();
-            _telefoneEstaConsistenteValidation = telefoneEstaConsistenteValidation;
         }
 
         public Guid TelefoneId { get; set; }
@@ -22,20 +19,20 @@ namespace MvcAppExample.Domain.Entities
         public virtual Contato Contato { get; set; }
         public ValidationResult ValidationResult { get; set; }
 
-        public bool Validar()
+        public virtual bool Validar()
         {
-            ValidationResult = _telefoneEstaConsistenteValidation.Validate(this);
+            ValidationResult = new TelefoneEstaConsistenteValidation().Validate(this);
             return ValidationResult.IsValid;
         }
 
-        internal bool ValidarDDD()
+        public virtual bool ValidarDDD()
         {
-            return Regex.IsMatch(DDD.ToString(), @"\A([0-9]2)\Z");
+            return Regex.IsMatch(DDD.ToString(), @"\A[0-9]{2}\Z");
         }
 
-        internal bool ValidarNumero()
+        public virtual bool ValidarNumero()
         {
-            return Regex.IsMatch(DDD.ToString(), @"\A([0-9]8)\Z");
+            return Regex.IsMatch(Numero.ToString(), @"\A9?[0-9]{8}\Z");
         }
     }
 }

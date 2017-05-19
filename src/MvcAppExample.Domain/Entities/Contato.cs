@@ -8,13 +8,10 @@ namespace MvcAppExample.Domain.Entities
 {
     public class Contato
     {
-        ContatoEstaConsistenteValidation _contatoEstaConsistenteValidation;
-
-        public Contato(ContatoEstaConsistenteValidation contatoEstaConsistenteValidation)
+        public Contato()
         {
             ContatoId = Guid.NewGuid();
             Telefones = new List<Telefone>();
-            _contatoEstaConsistenteValidation = contatoEstaConsistenteValidation;
         }
 
         public Guid ContatoId { get; set; }
@@ -25,9 +22,9 @@ namespace MvcAppExample.Domain.Entities
         public virtual ICollection<Telefone> Telefones { get; set; }
         public ValidationResult ValidationResult { get; set; }
 
-        public bool Valido()
+        public virtual bool Validar()
         {
-            ValidationResult = _contatoEstaConsistenteValidation.Validate(this);
+            ValidationResult = new ContatoEstaConsistenteValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }

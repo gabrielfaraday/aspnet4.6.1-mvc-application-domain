@@ -10,20 +10,18 @@ namespace MvcAppExample.Domain.Services
     public class AgendaService : IAgendaService
     {
         IAgendaRepository _agendaRepository;
-        ContatoAptoParaCadastroValidation _contatoAptoParaCadastroValidation;
 
-        public AgendaService(IAgendaRepository agendaRepository, ContatoAptoParaCadastroValidation contatoAptoParaCadastroValidation)
+        public AgendaService(IAgendaRepository agendaRepository)
         {
             _agendaRepository = agendaRepository;
-            _contatoAptoParaCadastroValidation = contatoAptoParaCadastroValidation;
         }
 
         public Contato Adicionar(Contato contato)
         {
-            if (!contato.Valido())
+            if (!contato.Validar())
                 return contato;
 
-            contato.ValidationResult = _contatoAptoParaCadastroValidation.Validate(contato);
+            contato.ValidationResult = new ContatoAptoParaCadastroValidation(_agendaRepository).Validate(contato);
 
             return contato.ValidationResult.IsValid
                 ? _agendaRepository.Add(contato)
@@ -32,7 +30,7 @@ namespace MvcAppExample.Domain.Services
 
         public Contato Atualizar(Contato contato)
         {
-            if (!contato.Valido())
+            if (!contato.Validar())
                 return contato;
 
             return _agendaRepository.Update(contato);
