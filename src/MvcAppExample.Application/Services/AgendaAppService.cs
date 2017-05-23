@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using MvcAppExample.Application.Interfaces;
 using MvcAppExample.Application.ViewModels;
-using MvcAppExample.Infra.Data.UnitOfWork;
 using MvcAppExample.Domain.Interfaces.Services;
 using AutoMapper;
 using MvcAppExample.Domain.Entities;
+using MvcAppExample.Infra.Data;
 
 namespace MvcAppExample.Application.Services
 {

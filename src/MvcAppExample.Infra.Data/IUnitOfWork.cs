@@ -1,4 +1,4 @@
-﻿namespace MvcAppExample.Infra.Data.UnitOfWork
+﻿namespace MvcAppExample.Infra.Data
 {
     public interface IUnitOfWork
     {

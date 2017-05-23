@@ -1,4 +1,4 @@
-﻿using MvcAppExample.Infra.Data.UnitOfWork;
+﻿using MvcAppExample.Infra.Data;
 
 namespace MvcAppExample.Application.Services
 {

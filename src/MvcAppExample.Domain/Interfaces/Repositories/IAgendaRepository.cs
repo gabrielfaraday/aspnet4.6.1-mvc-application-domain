@@ -6,6 +6,6 @@ namespace MvcAppExample.Domain.Interfaces.Repositories
     public interface IAgendaRepository : IRepositoryBase<Contato>
     {
         Contato ObterPorEmail(string email);
-        IEnumerable<Contato> ObterAtivos();
+        ICollection<Contato> ObterAtivos();
     }
 }
