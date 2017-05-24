@@ -1,10 +1,10 @@
-﻿using MvcAppExample.Domain.ValueObjects;
+﻿using MvcAppExample.Domain.Validations;
 using NUnit.Framework;
 
-namespace MvcAppExample.Domain.Tests.ValueObjects
+namespace MvcAppExample.Domain.Tests.Validations
 {
     [TestFixture]
-    public class EmailTest
+    public class EmailValidationTest
     {
         [TestCase("123", false)]
         [TestCase("asda", false)]
@@ -20,9 +20,7 @@ namespace MvcAppExample.Domain.Tests.ValueObjects
         [TestCase(null, false)]
         public void Email_Validar_ValidaEmail(string endereco, bool resultadoEsperado)
         {
-            var email = new Email { Endereco = endereco };
-
-            var resultado = email.Validar();
+            var resultado = EmailValidation.Validate(endereco);
 
             Assert.That(resultado, Is.EqualTo(resultadoEsperado));
         }

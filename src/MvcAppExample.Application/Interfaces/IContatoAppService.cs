@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MvcAppExample.Application.Interfaces
 {
-    public interface IAgendaAppService : IDisposable
+    public interface IContatoAppService : IDisposable
     {
         ContatoViewModel Adicionar(ContatoViewModel contatoViewModel);
         ContatoViewModel Atualizar(ContatoViewModel contatoViewModel);
@@ -13,5 +13,10 @@ namespace MvcAppExample.Application.Interfaces
         IEnumerable<ContatoViewModel> ObterTodos();
         ContatoViewModel ObterPorEmail(string email);
         IEnumerable<ContatoViewModel> ObterAtivos();
+
+        TelefoneViewModel AdicionarTelefone(TelefoneViewModel telefoneViewModel);
+        TelefoneViewModel AtualizarTelefone(TelefoneViewModel telefoneViewModel);
+        void RemoverTelefone(Guid id);
+        TelefoneViewModel ObterTelefonePorId(Guid id);
     }
 }

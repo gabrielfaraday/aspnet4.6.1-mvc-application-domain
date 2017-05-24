@@ -22,15 +22,14 @@ namespace MvcAppExample.Infra.Data.EntityConfigs
             Property(c => c.DataCadastro)
                 .IsRequired();
 
-            Property(c => c.Email.Endereco)
-                .HasColumnName("Email")
+            Property(c => c.Email)
                 .IsRequired()
                 .HasMaxLength(100)
                 .HasColumnAnnotation("EmailUnique", new IndexAnnotation(new IndexAttribute("IX_EMAIL") { IsUnique = true }));
 
             Ignore(c => c.ValidationResult);
 
-            ToTable("Clientes");
+            ToTable("Contatos");
         }
     }
 }

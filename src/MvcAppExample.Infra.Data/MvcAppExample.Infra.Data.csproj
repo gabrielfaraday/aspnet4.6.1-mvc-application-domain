@@ -57,10 +57,12 @@
     <Compile Include="Contexts\MainContext.cs" />
     <Compile Include="EntityConfigs\ContatoConfig.cs" />
     <Compile Include="EntityConfigs\TelefoneConfig.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Repositories\AgendaRepository.cs" />
+    <Compile Include="Repositories\ContatoRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\TelefoneRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

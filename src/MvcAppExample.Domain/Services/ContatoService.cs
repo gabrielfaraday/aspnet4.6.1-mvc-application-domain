@@ -7,13 +7,15 @@ using MvcAppExample.Domain.Validations.Contatos;
 
 namespace MvcAppExample.Domain.Services
 {
-    public class AgendaService : IAgendaService
+    public class ContatoService : IContatoService
     {
-        IAgendaRepository _agendaRepository;
+        IContatoRepository _agendaRepository;
+        ITelefoneRepository _telefoneRepository;
 
-        public AgendaService(IAgendaRepository agendaRepository)
+        public ContatoService(IContatoRepository agendaRepository, ITelefoneRepository telefoneRepository)
         {
             _agendaRepository = agendaRepository;
+            _telefoneRepository = telefoneRepository;
         }
 
         public Contato Adicionar(Contato contato)
@@ -61,11 +63,36 @@ namespace MvcAppExample.Domain.Services
             _agendaRepository.Delete(id);
         }
 
+        public Telefone AdicionarTelefone(Telefone telefone)
+        {
+            if (!telefone.Validar())
+                return telefone;
+
+            return _telefoneRepository.Add(telefone);
+        }
+
+        public Telefone AtualizarTelefone(Telefone telefone)
+        {
+            if (!telefone.Validar())
+                return telefone;
+
+            return _telefoneRepository.Update(telefone);
+        }
+
+        public Telefone ObterTelefonePorId(Guid id)
+        {
+            return _telefoneRepository.FindById(id);
+        }
+
+        public void RemoverTelefone(Guid id)
+        {
+            _telefoneRepository.Delete(id);
+        }
+
         public void Dispose()
         {
             _agendaRepository.Dispose();
             GC.SuppressFinalize(this);
         }
-
     }
 }

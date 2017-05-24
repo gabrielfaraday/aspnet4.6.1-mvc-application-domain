@@ -8,11 +8,7 @@ namespace MvcAppExample.Application.AutoMapper
     {
         protected override void Configure()
         {
-            CreateMap<Contato, ContatoViewModel>()
-                .ForMember(
-                    cvm => cvm.Email,
-                    c => c.MapFrom(x => x.Email.Endereco));
-
+            CreateMap<Contato, ContatoViewModel>();
             CreateMap<Telefone, TelefoneViewModel>();
         }
     }

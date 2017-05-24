@@ -40,17 +40,19 @@
   <ItemGroup>
     <Compile Include="Entities\Contato.cs" />
     <Compile Include="Entities\Telefone.cs" />
-    <Compile Include="Interfaces\Repositories\IAgendaRepository.cs" />
-    <Compile Include="Interfaces\Services\IAgendaService.cs" />
-    <Compile Include="Services\AgendaService.cs" />
+    <Compile Include="Interfaces\Repositories\IContatoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\ITelefoneRepository.cs" />
+    <Compile Include="Interfaces\Services\IContatoService.cs" />
+    <Compile Include="Services\ContatoService.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailUnicoSpecification.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailValidoSpecification.cs" />
+    <Compile Include="Specifications\Contatos\ContatoPossuiAoMenosUmTelefoneSpecification.cs" />
     <Compile Include="Specifications\Telefones\TelefonePossuiDDDValidoSpecification.cs" />
     <Compile Include="Specifications\Telefones\TelefonePossuiNumeroValidoSpecification.cs" />
     <Compile Include="Validations\Contatos\ContatoAptoParaCadastroValidation.cs" />
     <Compile Include="Validations\Contatos\ContatoEstaConsistenteValidation.cs" />
+    <Compile Include="Validations\EmailValidation.cs" />
     <Compile Include="Validations\Telefones\TelefoneEstaConsistenteValidation.cs" />
-    <Compile Include="ValueObjects\Email.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,4 @@
 ﻿using MvcAppExample.Domain.Entities;
-using MvcAppExample.Domain.ValueObjects;
 using NUnit.Framework;
 using System.Linq;
 
@@ -13,7 +12,7 @@ namespace MvcAppExample.Domain.Tests.Entities
         {
             var contato = new Contato
             {
-                Email = new Email { Endereco = "contato@email.com" }
+                Email = "contato@email.com"
             };
 
             var resultado = contato.Validar();
@@ -28,7 +27,7 @@ namespace MvcAppExample.Domain.Tests.Entities
         {
             var contato = new Contato
             {
-                Email = new Email { Endereco = "contatoemail.com" }
+                Email = "contatoemail.com"
             };
 
             var resultado = contato.Validar();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MvcAppExample.Domain.Interfaces.Repositories
 {
-    public interface IAgendaRepository : IRepositoryBase<Contato>
+    public interface IContatoRepository : IRepositoryBase<Contato>
     {
         Contato ObterPorEmail(string email);
         ICollection<Contato> ObterAtivos();

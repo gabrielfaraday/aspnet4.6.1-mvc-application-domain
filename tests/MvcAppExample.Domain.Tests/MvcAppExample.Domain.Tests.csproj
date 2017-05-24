@@ -65,11 +65,11 @@
     <Compile Include="Entities\ContatoTest.cs" />
     <Compile Include="Entities\TelefoneTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AgendaServiceTest.cs" />
+    <Compile Include="Services\ContatoServiceTest.cs" />
     <Compile Include="Validations\Contatos\ContatoAptoParaCadastroValidationTest.cs" />
     <Compile Include="Validations\Contatos\ContatoEstaConsistenteValidationTest.cs" />
+    <Compile Include="Validations\EmailValidationTest.cs" />
     <Compile Include="Validations\Telefones\TelefoneEstaConsistenteValidationTest.cs" />
-    <Compile Include="ValueObjects\EmailTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

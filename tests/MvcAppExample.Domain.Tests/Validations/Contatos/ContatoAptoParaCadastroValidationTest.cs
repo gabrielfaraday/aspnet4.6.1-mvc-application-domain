@@ -2,8 +2,8 @@
 using MvcAppExample.Domain.Entities;
 using MvcAppExample.Domain.Interfaces.Repositories;
 using MvcAppExample.Domain.Validations.Contatos;
-using MvcAppExample.Domain.ValueObjects;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MvcAppExample.Domain.Tests.Validations.Contatos
@@ -11,13 +11,13 @@ namespace MvcAppExample.Domain.Tests.Validations.Contatos
     [TestFixture]
     public class ContatoAptoParaCadastroValidationTest
     {
-        Mock<IAgendaRepository> _agendaRepositoryMock;
+        Mock<IContatoRepository> _agendaRepositoryMock;
         ContatoAptoParaCadastroValidation _validation;
 
         [SetUp]
         public void Setup()
         {
-            _agendaRepositoryMock = new Mock<IAgendaRepository>();
+            _agendaRepositoryMock = new Mock<IContatoRepository>();
             _validation = new ContatoAptoParaCadastroValidation(_agendaRepositoryMock.Object);
         }
 
@@ -26,12 +26,17 @@ namespace MvcAppExample.Domain.Tests.Validations.Contatos
         {
             var contato = new Contato
             {
-                Email = new Email { Endereco = "email@contato.com.br" }
+                Email = "email@contato.com.br",
+                Telefones = new List<Telefone>
+                {
+                    new Telefone { DDD = 16, Numero = 33337778 }
+                }
             };
 
             var resultado = _validation.Validate(contato);
 
             Assert.IsTrue(resultado.IsValid);
+            Assert.IsFalse(resultado.Erros.Any());
             _agendaRepositoryMock.Verify(x => x.ObterPorEmail("email@contato.com.br"), Times.Once);
         }
 
@@ -40,7 +45,7 @@ namespace MvcAppExample.Domain.Tests.Validations.Contatos
         {
             var contato = new Contato
             {
-                Email = new Email { Endereco = "email@contato.com.br" }
+                Email = "email@contato.com.br"
             };
 
             _agendaRepositoryMock.Setup(x => x.ObterPorEmail("email@contato.com.br")).Returns(contato);
@@ -49,6 +54,7 @@ namespace MvcAppExample.Domain.Tests.Validations.Contatos
 
             Assert.IsFalse(resultado.IsValid);
             Assert.IsTrue(resultado.Erros.Any(e => e.Message == "E-mail informado já cadastrado."));
+            Assert.IsTrue(resultado.Erros.Any(e => e.Message == "Contato deve ter ao menos um telefone."));
             _agendaRepositoryMock.Verify(x => x.ObterPorEmail("email@contato.com.br"), Times.Once);
 
         }

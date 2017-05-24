@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MvcAppExample.Application.ViewModels;
 using MvcAppExample.Domain.Entities;
-using MvcAppExample.Domain.ValueObjects;
 
 namespace MvcAppExample.Application.AutoMapper
 {
@@ -9,11 +8,7 @@ namespace MvcAppExample.Application.AutoMapper
     {
         protected override void Configure()
         {
-            CreateMap<ContatoViewModel, Contato>()
-                .ForMember(
-                    c => c.Email,
-                    cvm => cvm.ResolveUsing(x => new Email { Endereco = x.Email }));
-
+            CreateMap<ContatoViewModel, Contato>();
             CreateMap<TelefoneViewModel, Telefone>();
         }
     }

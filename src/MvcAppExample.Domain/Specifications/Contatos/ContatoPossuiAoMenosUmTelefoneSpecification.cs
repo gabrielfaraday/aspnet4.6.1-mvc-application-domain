@@ -1,14 +1,14 @@
 ﻿using DomainValidation.Interfaces.Specification;
 using MvcAppExample.Domain.Entities;
-using MvcAppExample.Domain.Validations;
+using System.Linq;
 
 namespace MvcAppExample.Domain.Specifications.Contatos
 {
-    public class ContatoPossuiEmailValidoSpecification : ISpecification<Contato>
+    public class ContatoPossuiAoMenosUmTelefoneSpecification : ISpecification<Contato>
     {
         public bool IsSatisfiedBy(Contato contato)
         {
-            return EmailValidation.Validate(contato.Email);
+            return contato.Telefones != null && contato.Telefones.Any();
         }
     }
 }

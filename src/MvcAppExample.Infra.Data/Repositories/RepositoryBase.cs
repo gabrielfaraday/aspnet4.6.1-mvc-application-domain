@@ -19,14 +19,14 @@ namespace MvcAppExample.Infra.Data.Repositories
             DbSet = Db.Set<TEntity>();
         }
 
-        public TEntity Add(TEntity entity)
+        public virtual TEntity FindById(Guid id)
         {
-            return DbSet.Add(entity);
+            return DbSet.Find(id);
         }
 
-        public void Delete(Guid id)
+        public virtual IEnumerable<TEntity> GetAll()
         {
-            DbSet.Remove(DbSet.Find(id));
+            return DbSet.ToList();
         }
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
@@ -34,19 +34,14 @@ namespace MvcAppExample.Infra.Data.Repositories
             return DbSet.Where(predicate);
         }
 
-        public TEntity FindById(Guid id)
+        public TEntity Add(TEntity entity)
         {
-            return DbSet.Find(id);
+            return DbSet.Add(entity);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public void Delete(Guid id)
         {
-            return DbSet.ToList();
-        }
-
-        public int SaveChanges()
-        {
-            return Db.SaveChanges();
+            DbSet.Remove(FindById(id));
         }
 
         public TEntity Update(TEntity entity)
@@ -56,6 +51,11 @@ namespace MvcAppExample.Infra.Data.Repositories
             entry.State = EntityState.Modified;
 
             return entity;
+        }
+
+        public int SaveChanges()
+        {
+            return Db.SaveChanges();
         }
 
         public void Dispose()
