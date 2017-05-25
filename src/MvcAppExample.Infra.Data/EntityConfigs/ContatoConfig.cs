@@ -25,7 +25,7 @@ namespace MvcAppExample.Infra.Data.EntityConfigs
             Property(c => c.Email)
                 .IsRequired()
                 .HasMaxLength(100)
-                .HasColumnAnnotation("EmailUnique", new IndexAnnotation(new IndexAttribute("IX_EMAIL") { IsUnique = true }));
+                .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute("IX_EMAIL") { IsUnique = true }));
 
             Ignore(c => c.ValidationResult);
 

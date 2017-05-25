@@ -17,7 +17,7 @@ namespace MvcAppExample.Infra.Data.EntityConfigs
 
             HasRequired(t => t.Contato)
                 .WithMany(c => c.Telefones)
-                .HasForeignKey(t => t.TelefoneId);
+                .HasForeignKey(t => t.ContatoId);
 
             Ignore(t => t.ValidationResult);
 

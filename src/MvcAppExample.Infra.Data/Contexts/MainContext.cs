@@ -11,7 +11,6 @@ namespace MvcAppExample.Infra.Data.Contexts
     {
         public MainContext() : base("DefaultConnection")
         {
-
         }
 
         public DbSet<Contato> Contatos { get; set; }
@@ -33,8 +32,8 @@ namespace MvcAppExample.Infra.Data.Contexts
             modelBuilder.Properties<string>()
                 .Configure(p => p.HasMaxLength(100));
 
-            //modelBuilder.Configurations.Add(new ContatoConfig());
-            //modelBuilder.Configurations.Add(new TelefoneConfig());
+            modelBuilder.Configurations.Add(new ContatoConfig());
+            modelBuilder.Configurations.Add(new TelefoneConfig());
 
             base.OnModelCreating(modelBuilder);
         }
