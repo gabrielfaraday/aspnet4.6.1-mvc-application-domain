@@ -41,6 +41,6 @@ namespace MvcAppExample.Application.ViewModels
         public virtual ICollection<TelefoneViewModel> Telefones { get; set; }
 
         [ScaffoldColumn(false)]
-        public ValidationResult ValidationResult { get; set; }
+        public DomainValidation.Validation.ValidationResult ValidationResult { get; set; }
     }
 }

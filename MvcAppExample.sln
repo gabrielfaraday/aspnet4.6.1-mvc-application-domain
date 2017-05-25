@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppExample.Infra.Data", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppExample.Web", "src\MvcAppExample.Web\MvcAppExample.Web.csproj", "{AAE68F1D-82B6-41BB-836D-A8C9F984671A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppExample.Infra.CrossCutting.MvcFilters", "src\MvcAppExample.Infra.CrossCutting.MvcFilters\MvcAppExample.Infra.CrossCutting.MvcFilters.csproj", "{C982FF8D-39FC-4E2B-B7DE-2E3BD555E2C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{AAE68F1D-82B6-41BB-836D-A8C9F984671A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAE68F1D-82B6-41BB-836D-A8C9F984671A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAE68F1D-82B6-41BB-836D-A8C9F984671A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C982FF8D-39FC-4E2B-B7DE-2E3BD555E2C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C982FF8D-39FC-4E2B-B7DE-2E3BD555E2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C982FF8D-39FC-4E2B-B7DE-2E3BD555E2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C982FF8D-39FC-4E2B-B7DE-2E3BD555E2C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,5 +71,6 @@ Global
 		{3D51770A-B612-411B-85D5-95A53B15A3E5} = {F569BCA2-E835-474A-AD02-C116F1E9AB9C}
 		{2F6F7AB5-EB90-4D6F-A6B6-1FC1B35E1E8C} = {79D3E2A9-9C48-40D6-887D-267CECACBED8}
 		{AAE68F1D-82B6-41BB-836D-A8C9F984671A} = {8CCE3C2E-D2FA-4E2A-B4E2-FFBE2325A31A}
+		{C982FF8D-39FC-4E2B-B7DE-2E3BD555E2C4} = {D036DBC0-7BFE-472E-8F5F-E80B5B198498}
 	EndGlobalSection
 EndGlobal

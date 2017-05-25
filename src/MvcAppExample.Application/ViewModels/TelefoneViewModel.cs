@@ -16,13 +16,13 @@ namespace MvcAppExample.Application.ViewModels
 
         [Required(ErrorMessage = "Informe o DDD do telefone")]
         [StringLength(2, ErrorMessage = "Deve ter 2 caracteres")]
-        public int DDD { get; set; }
+        public string DDD { get; set; }
 
         [Required(ErrorMessage = "Informe o número do telefone")]
         [MaxLength(9, ErrorMessage = "Máximo {0} caracteres")]
         [MinLength(8, ErrorMessage = "Minimo {0} caracteres")]
         [DisplayName("Número")]
-        public int Numero { get; set; }
+        public string Numero { get; set; }
 
         [ScaffoldColumn(false)]
         public Guid ContatoId { get; set; }
