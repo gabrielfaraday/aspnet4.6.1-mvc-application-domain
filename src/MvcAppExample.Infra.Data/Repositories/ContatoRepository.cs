@@ -17,7 +17,7 @@ namespace MvcAppExample.Infra.Data.Repositories
         public ICollection<Contato> ObterAtivos()
         {
             var conn = Db.Database.Connection;
-            var sql = @"SELECT *" +
+            var sql = @"SELECT * " +
                        "  FROM Contatos c " +
                        " INNER JOIN Telefones t ON t.ContatoId = c.ContatoId" +
                        " WHERE c.Ativo = 1 ";
@@ -37,7 +37,7 @@ namespace MvcAppExample.Infra.Data.Repositories
                     contato.Telefones.Add(t);
 
                     return contato;
-                }).AsQueryable();
+                }, splitOn: "ContatoId, EnderecoId").AsQueryable();
 
             return lookup.Values;
         }

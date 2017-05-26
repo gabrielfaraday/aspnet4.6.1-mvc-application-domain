@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using MvcAppExample.Application.ViewModels;
 using MvcAppExample.Application.Interfaces;
 using MvcAppExample.Infra.CrossCutting.MvcFilters;
+using WebGrease.Css.Extensions;
 
 namespace MvcAppExample.Web.Controllers
 {
@@ -22,7 +23,9 @@ namespace MvcAppExample.Web.Controllers
         [ClaimsAuthorize("ModuloContato", "CLst")]
         public ActionResult Index()
         {
-            return View(_contatoAppService.ObterAtivos());
+            //TODO: fix this: return View(_contatoAppService.ObterAtivos());
+
+            return View(_contatoAppService.ObterTodos());
         }
 
         [Route("{id:guid}/detalhe")]
@@ -54,11 +57,18 @@ namespace MvcAppExample.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ContatoViewModel contatoViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                _contatoAppService.Adicionar(contatoViewModel);
+            if (!ModelState.IsValid)
+                return View(contatoViewModel);
+
+            var contatoRetorno = _contatoAppService.Adicionar(contatoViewModel);
+
+            if (contatoRetorno.ValidationResult.IsValid)
                 return RedirectToAction("Index");
-            }
+
+            contatoRetorno
+                .ValidationResult
+                .Erros
+                .ForEach(e => ModelState.AddModelError(string.Empty, e.Message));
 
             return View(contatoViewModel);
         }
@@ -74,7 +84,7 @@ namespace MvcAppExample.Web.Controllers
 
             if (contatoViewModel == null)
                 return HttpNotFound();
-            
+
             return View(contatoViewModel);
         }
 
@@ -84,11 +94,19 @@ namespace MvcAppExample.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ContatoViewModel contatoViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                _contatoAppService.Atualizar(contatoViewModel);
+            if (!ModelState.IsValid)
+                return View(contatoViewModel);
+
+            var contatoRetorno = _contatoAppService.Atualizar(contatoViewModel);
+
+            if (contatoRetorno.ValidationResult.IsValid)
                 return RedirectToAction("Index");
-            }
+
+            contatoRetorno
+                .ValidationResult
+                .Erros
+                .ForEach(e => ModelState.AddModelError(string.Empty, e.Message));
+
             return View(contatoViewModel);
         }
 
@@ -103,7 +121,7 @@ namespace MvcAppExample.Web.Controllers
 
             if (contatoViewModel == null)
                 return HttpNotFound();
-            
+
             return View(contatoViewModel);
         }
 
@@ -121,7 +139,7 @@ namespace MvcAppExample.Web.Controllers
         {
             if (disposing)
                 _contatoAppService.Dispose();
-            
+
             base.Dispose(disposing);
         }
     }

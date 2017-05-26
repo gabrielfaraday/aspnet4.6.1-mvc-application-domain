@@ -3,6 +3,8 @@ using MvcAppExample.Application.Services;
 using MvcAppExample.Domain.Interfaces.Repositories;
 using MvcAppExample.Domain.Interfaces.Services;
 using MvcAppExample.Domain.Services;
+using MvcAppExample.Infra.Data;
+using MvcAppExample.Infra.Data.Contexts;
 using MvcAppExample.Infra.Data.Repositories;
 using SimpleInjector;
 
@@ -20,6 +22,9 @@ namespace MvcAppExample.Infra.CrossCutting.IoC
 
             //Data Layer
             container.Register<IContatoRepository, ContatoRepository>(Lifestyle.Scoped);
+            container.Register<ITelefoneRepository, TelefoneRepository>(Lifestyle.Scoped);
+            container.Register<IUnitOfWork, UnitOfWork>(Lifestyle.Scoped);
+            container.Register<MainContext>(Lifestyle.Scoped);
         }
     }
 }

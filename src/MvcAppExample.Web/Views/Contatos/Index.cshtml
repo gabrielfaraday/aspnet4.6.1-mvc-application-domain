@@ -5,10 +5,10 @@
     ViewBag.Title = "Contatos";
 }
 
-<h2>ViewBag.Title</h2>
+<h2>@ViewBag.Title</h2>
 
 @{ 
-    if (this.IfClaim("ModuloCliente", "CInc"))
+    if (this.IfClaim("ModuloContato", "CInc"))
     {
         <p>@Html.ActionLink("Novo Contato", "Create")</p>
     }
