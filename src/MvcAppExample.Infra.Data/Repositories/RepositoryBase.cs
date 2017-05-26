@@ -34,17 +34,17 @@ namespace MvcAppExample.Infra.Data.Repositories
             return DbSet.Where(predicate);
         }
 
-        public TEntity Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
             return DbSet.Add(entity);
         }
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             DbSet.Remove(FindById(id));
         }
 
-        public TEntity Update(TEntity entity)
+        public virtual TEntity Update(TEntity entity)
         {
             var entry = Db.Entry(entity);
             DbSet.Attach(entity);

@@ -11,14 +11,14 @@ namespace MvcAppExample.Domain.Tests.Validations.Contatos
     [TestFixture]
     public class ContatoAptoParaCadastroValidationTest
     {
-        Mock<IContatoRepository> _agendaRepositoryMock;
+        Mock<IContatoRepository> _contatoRepositoryMock;
         ContatoAptoParaCadastroValidation _validation;
 
         [SetUp]
         public void Setup()
         {
-            _agendaRepositoryMock = new Mock<IContatoRepository>();
-            _validation = new ContatoAptoParaCadastroValidation(_agendaRepositoryMock.Object);
+            _contatoRepositoryMock = new Mock<IContatoRepository>();
+            _validation = new ContatoAptoParaCadastroValidation(_contatoRepositoryMock.Object);
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace MvcAppExample.Domain.Tests.Validations.Contatos
 
             Assert.IsTrue(resultado.IsValid);
             Assert.IsFalse(resultado.Erros.Any());
-            _agendaRepositoryMock.Verify(x => x.ObterPorEmail("email@contato.com.br"), Times.Once);
+            _contatoRepositoryMock.Verify(x => x.ObterPorEmail("email@contato.com.br"), Times.Once);
         }
 
         [Test]
@@ -48,14 +48,13 @@ namespace MvcAppExample.Domain.Tests.Validations.Contatos
                 Email = "email@contato.com.br"
             };
 
-            _agendaRepositoryMock.Setup(x => x.ObterPorEmail("email@contato.com.br")).Returns(contato);
+            _contatoRepositoryMock.Setup(x => x.ObterPorEmail("email@contato.com.br")).Returns(contato);
 
             var resultado = _validation.Validate(contato);
 
             Assert.IsFalse(resultado.IsValid);
             Assert.IsTrue(resultado.Erros.Any(e => e.Message == "E-mail informado já cadastrado."));
-            Assert.IsTrue(resultado.Erros.Any(e => e.Message == "Contato deve ter ao menos um telefone."));
-            _agendaRepositoryMock.Verify(x => x.ObterPorEmail("email@contato.com.br"), Times.Once);
+            _contatoRepositoryMock.Verify(x => x.ObterPorEmail("email@contato.com.br"), Times.Once);
 
         }
     }

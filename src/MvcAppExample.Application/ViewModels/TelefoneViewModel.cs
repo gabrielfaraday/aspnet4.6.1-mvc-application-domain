@@ -19,8 +19,8 @@ namespace MvcAppExample.Application.ViewModels
         public string DDD { get; set; }
 
         [Required(ErrorMessage = "Informe o número do telefone")]
-        [MaxLength(9, ErrorMessage = "Máximo {0} caracteres")]
-        [MinLength(8, ErrorMessage = "Minimo {0} caracteres")]
+        [MaxLength(9, ErrorMessage = "Máximo 9 caracteres")]
+        [MinLength(8, ErrorMessage = "Minimo 8 caracteres")]
         [DisplayName("Número")]
         public string Numero { get; set; }
 

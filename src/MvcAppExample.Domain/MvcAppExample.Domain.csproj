@@ -46,7 +46,6 @@
     <Compile Include="Services\ContatoService.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailUnicoSpecification.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailValidoSpecification.cs" />
-    <Compile Include="Specifications\Contatos\ContatoPossuiAoMenosUmTelefoneSpecification.cs" />
     <Compile Include="Specifications\Telefones\TelefonePossuiDDDValidoSpecification.cs" />
     <Compile Include="Specifications\Telefones\TelefonePossuiNumeroValidoSpecification.cs" />
     <Compile Include="Validations\Contatos\ContatoAptoParaCadastroValidation.cs" />

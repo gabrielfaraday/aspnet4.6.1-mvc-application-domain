@@ -65,6 +65,7 @@ namespace MvcAppExample.Application.Services
         public void Remover(Guid id)
         {
             _contatoService.Remover(id);
+            Commit();
         }
 
         public void Dispose()
@@ -100,6 +101,7 @@ namespace MvcAppExample.Application.Services
         public void RemoverTelefone(Guid id)
         {
             _contatoService.RemoverTelefone(id);
+            Commit();
         }
 
         public TelefoneViewModel ObterTelefonePorId(Guid id)

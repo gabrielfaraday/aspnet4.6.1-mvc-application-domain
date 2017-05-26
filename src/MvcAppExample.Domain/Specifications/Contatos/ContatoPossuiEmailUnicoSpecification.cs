@@ -6,16 +6,16 @@ namespace MvcAppExample.Domain.Specifications.Contatos
 {
     public class ContatoPossuiEmailUnicoSpecification : ISpecification<Contato>
     {
-        private readonly IContatoRepository _agendaRepository;
+        private readonly IContatoRepository _contatoRepository;
 
-        public ContatoPossuiEmailUnicoSpecification(IContatoRepository agendaRepository)
+        public ContatoPossuiEmailUnicoSpecification(IContatoRepository contatoRepository)
         {
-            _agendaRepository = agendaRepository;
+            _contatoRepository = contatoRepository;
         }
 
         public bool IsSatisfiedBy(Contato contato)
         {
-            return _agendaRepository.ObterPorEmail(contato.Email) == null;
+            return _contatoRepository.ObterPorEmail(contato.Email) == null;
         }
     }
 }

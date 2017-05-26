@@ -23,35 +23,32 @@ namespace MvcAppExample.Web.Controllers
         [ClaimsAuthorize("ModuloContato", "CLst")]
         public ActionResult Index()
         {
-            //TODO: fix this: return View(_contatoAppService.ObterAtivos());
-
-            return View(_contatoAppService.ObterTodos());
+            return View(_contatoAppService.ObterAtivos());
         }
 
-        [Route("{id:guid}/detalhe")]
-        [ClaimsAuthorize("ModuloContato", "CDet")]
+        [Route("{id:guid}/telefones")]
+        [ClaimsAuthorize("ModuloContato", "TLst")]
         public ActionResult Details(Guid? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ContatoViewModel contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
 
             if (contatoViewModel == null)
-            {
                 return HttpNotFound();
-            }
+            
             return View(contatoViewModel);
         }
 
-        [Route("criar")]
+        [Route("novo")]
         [ClaimsAuthorize("ModuloContato", "CInc")]
         public ActionResult Create()
         {
             return View();
         }
 
-        [Route("criar")]
+        [Route("novo")]
         [ClaimsAuthorize("ModuloContato", "CInc")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,7 +77,7 @@ namespace MvcAppExample.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ContatoViewModel contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
 
             if (contatoViewModel == null)
                 return HttpNotFound();
@@ -117,7 +114,7 @@ namespace MvcAppExample.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            ContatoViewModel contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
 
             if (contatoViewModel == null)
                 return HttpNotFound();
@@ -133,6 +130,67 @@ namespace MvcAppExample.Web.Controllers
         {
             _contatoAppService.Remover(id);
             return RedirectToAction("Index");
+        }
+
+        [Route("{id:guid}/novo-fone")]
+        [ClaimsAuthorize("ModuloContato", "TInc")]
+        public ActionResult NovoFone(Guid? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+
+            if (contatoViewModel == null)
+                return HttpNotFound();
+
+            var telefoneViewModel = new TelefoneViewModel
+            {
+                ContatoId = contatoViewModel.ContatoId
+            };
+
+            return View(telefoneViewModel);
+        }
+
+        [Route("{id:guid}/novo-fone")]
+        [ClaimsAuthorize("ModuloContato", "TInc")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NovoFone(TelefoneViewModel telefoneViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(telefoneViewModel);
+
+            var telefoneRetorno = _contatoAppService.AdicionarTelefone(telefoneViewModel);
+
+            if (telefoneRetorno.ValidationResult.IsValid)
+            {
+                var contatoViewModel = _contatoAppService.ObterPorId(telefoneViewModel.ContatoId);
+                return View("Details", contatoViewModel);
+            }
+
+            telefoneRetorno
+                .ValidationResult
+                .Erros
+                .ForEach(e => ModelState.AddModelError(string.Empty, e.Message));
+
+            return View(telefoneViewModel);
+        }
+
+        [Route("{id:guid}/remover-telefone")]
+        [ClaimsAuthorize("ModuloContato", "TRmv")]
+        public ActionResult RemoverFone(Guid id)
+        {
+            var telefoneViewModel = _contatoAppService.ObterTelefonePorId(id);
+
+            if (telefoneViewModel == null)
+                return HttpNotFound();
+
+            _contatoAppService.RemoverTelefone(id);
+
+            var contatoViewModel = _contatoAppService.ObterPorId(telefoneViewModel.ContatoId);
+
+            return View("Details", contatoViewModel);
         }
 
         protected override void Dispose(bool disposing)

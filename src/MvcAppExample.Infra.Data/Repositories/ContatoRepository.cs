@@ -19,7 +19,7 @@ namespace MvcAppExample.Infra.Data.Repositories
             var conn = Db.Database.Connection;
             var sql = @"SELECT * " +
                        "  FROM Contatos c " +
-                       " INNER JOIN Telefones t ON t.ContatoId = c.ContatoId" +
+                       " LEFT JOIN Telefones t ON t.ContatoId = c.ContatoId" +
                        " WHERE c.Ativo = 1 ";
 
             var lookup = new Dictionary<Guid, Contato>();
@@ -34,10 +34,11 @@ namespace MvcAppExample.Infra.Data.Repositories
                     if (contato.Telefones == null)
                         contato.Telefones = new List<Telefone>();
 
-                    contato.Telefones.Add(t);
+                    if (t != null)
+                        contato.Telefones.Add(t);
 
                     return contato;
-                }, splitOn: "ContatoId, EnderecoId").AsQueryable();
+                }, splitOn: "ContatoId, TelefoneId").AsQueryable();
 
             return lookup.Values;
         }
@@ -50,21 +51,27 @@ namespace MvcAppExample.Infra.Data.Repositories
         public override Contato FindById(Guid id)
         {
             var conn = Db.Database.Connection;
-            var sql = @"SELECT *" +
+            var sql = @"SELECT * " +
                        "  FROM Contatos c " +
-                       " INNER JOIN Telefones t ON t.ContatoId = c.ContatoId" +
+                       " LEFT JOIN Telefones t ON t.ContatoId = c.ContatoId" +
                        " WHERE c.ContatoId = @pid";
 
-            var contatos = new List<Contato>();
-            conn.Query<Contato, Telefone, Contato>(sql,
+            var fones = new List<Telefone>();
+            var contatos = conn.Query<Contato, Telefone, Contato>(sql,
                 (c, t) =>
                 {
-                    c.Telefones.Add(t);
-                    contatos.Add(c);
-                    return contatos.SingleOrDefault();
-                }, new { pid = id }, splitOn: "ContatoId, EnderecoId");
+                    if (t != null)
+                        fones.Add(t);
 
-            return contatos.SingleOrDefault();
+                    return c;
+                }, new { pid = id }, splitOn: "ContatoId, TelefoneId");
+
+            var contato = contatos.FirstOrDefault();
+
+            if (contato != null)
+                contato.Telefones = fones;
+
+            return contato;
         }
 
         public override IEnumerable<Contato> GetAll()
@@ -74,6 +81,13 @@ namespace MvcAppExample.Infra.Data.Repositories
             var sql = @"SELECT * FROM Contatos";
 
             return conn.Query<Contato>(sql);
+        }
+
+        public override void Delete(Guid id)
+        {
+            var contato = FindById(id);
+            contato.Ativo = false;
+            Update(contato);
         }
     }
 }

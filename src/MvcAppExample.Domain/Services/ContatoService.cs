@@ -9,12 +9,12 @@ namespace MvcAppExample.Domain.Services
 {
     public class ContatoService : IContatoService
     {
-        IContatoRepository _agendaRepository;
+        IContatoRepository _contatoRepository;
         ITelefoneRepository _telefoneRepository;
 
-        public ContatoService(IContatoRepository agendaRepository, ITelefoneRepository telefoneRepository)
+        public ContatoService(IContatoRepository contatoRepository, ITelefoneRepository telefoneRepository)
         {
-            _agendaRepository = agendaRepository;
+            _contatoRepository = contatoRepository;
             _telefoneRepository = telefoneRepository;
         }
 
@@ -23,10 +23,12 @@ namespace MvcAppExample.Domain.Services
             if (!contato.Validar())
                 return contato;
 
-            contato.ValidationResult = new ContatoAptoParaCadastroValidation(_agendaRepository).Validate(contato);
+            contato.ValidationResult = new ContatoAptoParaCadastroValidation(_contatoRepository).Validate(contato);
+
+            contato.Ativo = true;
 
             return contato.ValidationResult.IsValid
-                ? _agendaRepository.Add(contato)
+                ? _contatoRepository.Add(contato)
                 : contato;
         }
 
@@ -35,32 +37,34 @@ namespace MvcAppExample.Domain.Services
             if (!contato.Validar())
                 return contato;
 
-            return _agendaRepository.Update(contato);
+            contato.Ativo = true;
+
+            return _contatoRepository.Update(contato);
         }
 
         public IEnumerable<Contato> ObterAtivos()
         {
-            return _agendaRepository.ObterAtivos();
+            return _contatoRepository.ObterAtivos();
         }
 
         public Contato ObterPorEmail(string email)
         {
-            return _agendaRepository.ObterPorEmail(email);
+            return _contatoRepository.ObterPorEmail(email);
         }
 
         public Contato ObterPorId(Guid id)
         {
-            return _agendaRepository.FindById(id);
+            return _contatoRepository.FindById(id);
         }
 
         public IEnumerable<Contato> ObterTodos()
         {
-            return _agendaRepository.GetAll();
+            return _contatoRepository.GetAll();
         }
 
         public void Remover(Guid id)
         {
-            _agendaRepository.Delete(id);
+            _contatoRepository.Delete(id);
         }
 
         public Telefone AdicionarTelefone(Telefone telefone)
@@ -91,7 +95,7 @@ namespace MvcAppExample.Domain.Services
 
         public void Dispose()
         {
-            _agendaRepository.Dispose();
+            _contatoRepository.Dispose();
             GC.SuppressFinalize(this);
         }
     }

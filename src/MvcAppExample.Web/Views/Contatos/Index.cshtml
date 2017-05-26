@@ -33,8 +33,8 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
+            @Html.ActionLink("Telefones", "Details", new { id = item.ContatoId }).IfClaimHelper("ModuloContato", "TLst") |
             @Html.ActionLink("Alterar", "Edit", new { id=item.ContatoId }).IfClaimHelper("ModuloContato", "CEdt") |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.ContatoId }).IfClaimHelper("ModuloContato", "CDet") |
             @Html.ActionLink("Remover", "Delete", new { id=item.ContatoId }).IfClaimHelper("ModuloContato", "CRmv")
         </td>
     </tr>

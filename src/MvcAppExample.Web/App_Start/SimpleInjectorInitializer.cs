@@ -11,7 +11,6 @@ namespace MvcAppExample.Web.App_Start
 {
     public static class SimpleInjectorInitializer
     {
-        /// <summary>Initialize the container and register it as MVC3 Dependency Resolver.</summary>
         public static void Initialize()
         {
             var container = new Container();

@@ -7,13 +7,11 @@ namespace MvcAppExample.Domain.Validations.Contatos
 {
     public class ContatoAptoParaCadastroValidation : Validator<Contato>
     {
-        public ContatoAptoParaCadastroValidation(IContatoRepository agendaRepository)
+        public ContatoAptoParaCadastroValidation(IContatoRepository contatoRepository)
         {
-            var emailSpecification = new ContatoPossuiEmailUnicoSpecification(agendaRepository);
-            var telefoneSpecification = new ContatoPossuiAoMenosUmTelefoneSpecification();
+            var emailSpecification = new ContatoPossuiEmailUnicoSpecification(contatoRepository);
 
             base.Add("contatoEmailUnico", new Rule<Contato>(emailSpecification, "E-mail informado já cadastrado."));
-            base.Add("contatoPossuiTelefone", new Rule<Contato>(telefoneSpecification, "Contato deve ter ao menos um telefone."));
         }
     }
 }
