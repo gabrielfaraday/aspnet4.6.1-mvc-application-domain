@@ -9,12 +9,10 @@ namespace MvcAppExample.Domain.Services
 {
     public class ContatoService : ServiceBase<Contato, IContatoRepository>, IContatoService
     {
-        IContatoRepository _contatoRepository;
         ITelefoneRepository _telefoneRepository;
 
         public ContatoService(IContatoRepository contatoRepository, ITelefoneRepository telefoneRepository) : base(contatoRepository)
         {
-            _contatoRepository = contatoRepository;
             _telefoneRepository = telefoneRepository;
         }
 
@@ -23,12 +21,12 @@ namespace MvcAppExample.Domain.Services
             if (!contato.Validar())
                 return contato;
 
-            contato.ValidationResult = new ContatoAptoParaCadastroValidation(_contatoRepository).Validate(contato);
+            contato.ValidationResult = new ContatoAptoParaCadastroValidation(_repository).Validate(contato);
 
             contato.Ativo = true;
 
             return contato.ValidationResult.IsValid
-                ? _contatoRepository.Add(contato)
+                ? _repository.Add(contato)
                 : contato;
         }
 
@@ -39,17 +37,17 @@ namespace MvcAppExample.Domain.Services
 
             contato.Ativo = true;
 
-            return _contatoRepository.Update(contato);
+            return _repository.Update(contato);
         }
 
         public IEnumerable<Contato> ObterAtivos()
         {
-            return _contatoRepository.ObterAtivos();
+            return _repository.ObterAtivos();
         }
 
         public Contato ObterPorEmail(string email)
         {
-            return _contatoRepository.ObterPorEmail(email);
+            return _repository.ObterPorEmail(email);
         }
 
         public Telefone AdicionarTelefone(Telefone telefone)

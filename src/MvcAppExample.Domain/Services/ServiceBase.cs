@@ -7,7 +7,7 @@ namespace MvcAppExample.Domain.Services
 {
     public abstract class ServiceBase<TEntity, TRepository> : IServiceBase<TEntity> where TEntity : class where TRepository : IRepositoryBase<TEntity>
     {
-        TRepository _repository;
+        protected TRepository _repository;
 
         public ServiceBase(TRepository repository)
         {

@@ -9,20 +9,15 @@ using MvcAppExample.Infra.Data;
 
 namespace MvcAppExample.Application.Services
 {
-    public class ContatoAppService : AppServiceBase, IContatoAppService
+    public class ContatoAppService : AppServiceBase<Contato, ContatoViewModel, IContatoService>, IContatoAppService
     {
-        private readonly IContatoService _contatoService;
-
-        public ContatoAppService(IContatoService contatoService, IUnitOfWork uow) : base(uow)
+        public ContatoAppService(IContatoService contatoService, IUnitOfWork uow) : base(uow, contatoService)
         {
-            _contatoService = contatoService;
         }
 
-        public ContatoViewModel Adicionar(ContatoViewModel contatoViewModel)
+        public override ContatoViewModel Add(ContatoViewModel contatoViewModel)
         {
-            var contato = Mapper.Map<Contato>(contatoViewModel);
-
-            contato = _contatoService.Add(contato);
+            var contato = _service.Add(Mapper.Map<Contato>(contatoViewModel));
 
             if (contato.ValidationResult.IsValid)
                 Commit();
@@ -30,11 +25,9 @@ namespace MvcAppExample.Application.Services
             return Mapper.Map<ContatoViewModel>(contato);
         }
 
-        public ContatoViewModel Atualizar(ContatoViewModel contatoViewModel)
+        public override ContatoViewModel Update(ContatoViewModel contatoViewModel)
         {
-            var contato = Mapper.Map<Contato>(contatoViewModel);
-
-            contato = _contatoService.Update(contato);
+            var contato = _service.Update(Mapper.Map<Contato>(contatoViewModel));
 
             if (contato.ValidationResult.IsValid)
                 Commit();
@@ -44,41 +37,17 @@ namespace MvcAppExample.Application.Services
 
         public IEnumerable<ContatoViewModel> ObterAtivos()
         {
-            return Mapper.Map<IEnumerable<ContatoViewModel>>(_contatoService.ObterAtivos());
+            return Mapper.Map<IEnumerable<ContatoViewModel>>(_service.ObterAtivos());
         }
 
         public ContatoViewModel ObterPorEmail(string email)
         {
-            return Mapper.Map<ContatoViewModel>(_contatoService.ObterPorEmail(email));
-        }
-
-        public ContatoViewModel ObterPorId(Guid id)
-        {
-            return Mapper.Map<ContatoViewModel>(_contatoService.FindById(id));
-        }
-
-        public IEnumerable<ContatoViewModel> ObterTodos()
-        {
-            return Mapper.Map<IEnumerable<ContatoViewModel>>(_contatoService.GetAll());
-        }
-
-        public void Remover(Guid id)
-        {
-            _contatoService.Delete(id);
-            Commit();
-        }
-
-        public void Dispose()
-        {
-            _contatoService.Dispose();
-            GC.SuppressFinalize(this);
+            return Mapper.Map<ContatoViewModel>(_service.ObterPorEmail(email));
         }
 
         public TelefoneViewModel AdicionarTelefone(TelefoneViewModel telefoneViewModel)
         {
-            var telefone = Mapper.Map<Telefone>(telefoneViewModel);
-
-            telefone = _contatoService.AdicionarTelefone(telefone);
+            var telefone = _service.AdicionarTelefone(Mapper.Map<Telefone>(telefoneViewModel));
 
             if (telefone.ValidationResult.IsValid)
                 Commit();
@@ -88,9 +57,7 @@ namespace MvcAppExample.Application.Services
 
         public TelefoneViewModel AtualizarTelefone(TelefoneViewModel telefoneViewModel)
         {
-            var telefone = Mapper.Map<Telefone>(telefoneViewModel);
-
-            telefone = _contatoService.AtualizarTelefone(telefone);
+            var telefone = _service.AtualizarTelefone(Mapper.Map<Telefone>(telefoneViewModel));
 
             if (telefone.ValidationResult.IsValid)
                 Commit();
@@ -100,13 +67,13 @@ namespace MvcAppExample.Application.Services
 
         public void RemoverTelefone(Guid id)
         {
-            _contatoService.RemoverTelefone(id);
+            _service.RemoverTelefone(id);
             Commit();
         }
 
         public TelefoneViewModel ObterTelefonePorId(Guid id)
         {
-            return Mapper.Map<TelefoneViewModel>(_contatoService.ObterTelefonePorId(id));
+            return Mapper.Map<TelefoneViewModel>(_service.ObterTelefonePorId(id));
         }
     }
 }

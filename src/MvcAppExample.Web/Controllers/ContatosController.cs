@@ -33,7 +33,7 @@ namespace MvcAppExample.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+            var contatoViewModel = _contatoAppService.FindById(id.Value);
 
             if (contatoViewModel == null)
                 return HttpNotFound();
@@ -57,7 +57,7 @@ namespace MvcAppExample.Web.Controllers
             if (!ModelState.IsValid)
                 return View(contatoViewModel);
 
-            var contatoRetorno = _contatoAppService.Adicionar(contatoViewModel);
+            var contatoRetorno = _contatoAppService.Add(contatoViewModel);
 
             if (contatoRetorno.ValidationResult.IsValid)
                 return RedirectToAction("Index");
@@ -77,7 +77,7 @@ namespace MvcAppExample.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+            var contatoViewModel = _contatoAppService.FindById(id.Value);
 
             if (contatoViewModel == null)
                 return HttpNotFound();
@@ -94,7 +94,7 @@ namespace MvcAppExample.Web.Controllers
             if (!ModelState.IsValid)
                 return View(contatoViewModel);
 
-            var contatoRetorno = _contatoAppService.Atualizar(contatoViewModel);
+            var contatoRetorno = _contatoAppService.Update(contatoViewModel);
 
             if (contatoRetorno.ValidationResult.IsValid)
                 return RedirectToAction("Index");
@@ -114,7 +114,7 @@ namespace MvcAppExample.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+            var contatoViewModel = _contatoAppService.FindById(id.Value);
 
             if (contatoViewModel == null)
                 return HttpNotFound();
@@ -128,7 +128,7 @@ namespace MvcAppExample.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            _contatoAppService.Remover(id);
+            _contatoAppService.Delete(id);
             return RedirectToAction("Index");
         }
 
@@ -139,7 +139,7 @@ namespace MvcAppExample.Web.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            var contatoViewModel = _contatoAppService.ObterPorId(id.Value);
+            var contatoViewModel = _contatoAppService.FindById(id.Value);
 
             if (contatoViewModel == null)
                 return HttpNotFound();
@@ -165,7 +165,7 @@ namespace MvcAppExample.Web.Controllers
 
             if (telefoneRetorno.ValidationResult.IsValid)
             {
-                var contatoViewModel = _contatoAppService.ObterPorId(telefoneViewModel.ContatoId);
+                var contatoViewModel = _contatoAppService.FindById(telefoneViewModel.ContatoId);
                 return View("Details", contatoViewModel);
             }
 
@@ -188,7 +188,7 @@ namespace MvcAppExample.Web.Controllers
 
             _contatoAppService.RemoverTelefone(id);
 
-            var contatoViewModel = _contatoAppService.ObterPorId(telefoneViewModel.ContatoId);
+            var contatoViewModel = _contatoAppService.FindById(telefoneViewModel.ContatoId);
 
             return View("Details", contatoViewModel);
         }
