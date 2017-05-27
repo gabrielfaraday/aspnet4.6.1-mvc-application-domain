@@ -7,18 +7,18 @@ using MvcAppExample.Domain.Validations.Contatos;
 
 namespace MvcAppExample.Domain.Services
 {
-    public class ContatoService : IContatoService
+    public class ContatoService : ServiceBase<Contato, IContatoRepository>, IContatoService
     {
         IContatoRepository _contatoRepository;
         ITelefoneRepository _telefoneRepository;
 
-        public ContatoService(IContatoRepository contatoRepository, ITelefoneRepository telefoneRepository)
+        public ContatoService(IContatoRepository contatoRepository, ITelefoneRepository telefoneRepository) : base(contatoRepository)
         {
             _contatoRepository = contatoRepository;
             _telefoneRepository = telefoneRepository;
         }
 
-        public Contato Adicionar(Contato contato)
+        public override Contato Add(Contato contato)
         {
             if (!contato.Validar())
                 return contato;
@@ -32,7 +32,7 @@ namespace MvcAppExample.Domain.Services
                 : contato;
         }
 
-        public Contato Atualizar(Contato contato)
+        public override Contato Update(Contato contato)
         {
             if (!contato.Validar())
                 return contato;
@@ -50,21 +50,6 @@ namespace MvcAppExample.Domain.Services
         public Contato ObterPorEmail(string email)
         {
             return _contatoRepository.ObterPorEmail(email);
-        }
-
-        public Contato ObterPorId(Guid id)
-        {
-            return _contatoRepository.FindById(id);
-        }
-
-        public IEnumerable<Contato> ObterTodos()
-        {
-            return _contatoRepository.GetAll();
-        }
-
-        public void Remover(Guid id)
-        {
-            _contatoRepository.Delete(id);
         }
 
         public Telefone AdicionarTelefone(Telefone telefone)
@@ -93,10 +78,11 @@ namespace MvcAppExample.Domain.Services
             _telefoneRepository.Delete(id);
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
-            _contatoRepository.Dispose();
+            _telefoneRepository.Dispose();
             GC.SuppressFinalize(this);
+            base.Dispose();
         }
     }
 }

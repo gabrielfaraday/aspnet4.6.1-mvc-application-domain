@@ -30,7 +30,7 @@ namespace MvcAppExample.Domain.Tests.Services
                 Email = "contatoemail.com"
             };
 
-            var resultado = _contatoService.Adicionar(contato);
+            var resultado = _contatoService.Add(contato);
 
             _contatoRepositoryMock.Verify(x => x.Add(contato), Times.Never);
         }
@@ -43,7 +43,7 @@ namespace MvcAppExample.Domain.Tests.Services
                 Email = "contato@email.com"
             };
 
-            var resultado = _contatoService.Adicionar(contato);
+            var resultado = _contatoService.Add(contato);
 
             _contatoRepositoryMock.Verify(x => x.Add(contato), Times.Once);
         }
@@ -56,7 +56,7 @@ namespace MvcAppExample.Domain.Tests.Services
                 Email = "contatoemail.com"
             };
 
-            var resultado = _contatoService.Atualizar(contato);
+            var resultado = _contatoService.Update(contato);
 
             _contatoRepositoryMock.Verify(x => x.Update(contato), Times.Never);
         }
@@ -69,7 +69,7 @@ namespace MvcAppExample.Domain.Tests.Services
                 Email = "contato@email.com"
             };
 
-            var resultado = _contatoService.Atualizar(contato);
+            var resultado = _contatoService.Update(contato);
 
             _contatoRepositoryMock.Verify(x => x.Update(contato), Times.Once);
         }
@@ -85,7 +85,7 @@ namespace MvcAppExample.Domain.Tests.Services
         [Test]
         public void Contato_ObterTodos_ObtemTodos()
         {
-            var resultado = _contatoService.ObterTodos();
+            var resultado = _contatoService.GetAll();
 
             _contatoRepositoryMock.Verify(x => x.GetAll(), Times.Once);
         }
@@ -103,7 +103,7 @@ namespace MvcAppExample.Domain.Tests.Services
         {
             var guid = Guid.NewGuid();
 
-            var resultado = _contatoService.ObterPorId(guid);
+            var resultado = _contatoService.FindById(guid);
 
             _contatoRepositoryMock.Verify(x => x.FindById(guid), Times.Once);
         }
@@ -113,7 +113,7 @@ namespace MvcAppExample.Domain.Tests.Services
         {
             var guid = Guid.NewGuid();
 
-            _contatoService.Remover(guid);
+            _contatoService.Delete(guid);
 
             _contatoRepositoryMock.Verify(x => x.Delete(guid), Times.Once);
         }

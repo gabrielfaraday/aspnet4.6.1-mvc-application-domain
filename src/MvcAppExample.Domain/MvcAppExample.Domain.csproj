@@ -43,7 +43,9 @@
     <Compile Include="Interfaces\Repositories\IContatoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITelefoneRepository.cs" />
     <Compile Include="Interfaces\Services\IContatoService.cs" />
+    <Compile Include="Interfaces\Services\IServiceBase.cs" />
     <Compile Include="Services\ContatoService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailUnicoSpecification.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailValidoSpecification.cs" />
     <Compile Include="Specifications\Telefones\TelefonePossuiDDDValidoSpecification.cs" />

@@ -22,7 +22,7 @@ namespace MvcAppExample.Application.Services
         {
             var contato = Mapper.Map<Contato>(contatoViewModel);
 
-            contato = _contatoService.Adicionar(contato);
+            contato = _contatoService.Add(contato);
 
             if (contato.ValidationResult.IsValid)
                 Commit();
@@ -34,7 +34,7 @@ namespace MvcAppExample.Application.Services
         {
             var contato = Mapper.Map<Contato>(contatoViewModel);
 
-            contato = _contatoService.Atualizar(contato);
+            contato = _contatoService.Update(contato);
 
             if (contato.ValidationResult.IsValid)
                 Commit();
@@ -54,17 +54,17 @@ namespace MvcAppExample.Application.Services
 
         public ContatoViewModel ObterPorId(Guid id)
         {
-            return Mapper.Map<ContatoViewModel>(_contatoService.ObterPorId(id));
+            return Mapper.Map<ContatoViewModel>(_contatoService.FindById(id));
         }
 
         public IEnumerable<ContatoViewModel> ObterTodos()
         {
-            return Mapper.Map<IEnumerable<ContatoViewModel>>(_contatoService.ObterTodos());
+            return Mapper.Map<IEnumerable<ContatoViewModel>>(_contatoService.GetAll());
         }
 
         public void Remover(Guid id)
         {
-            _contatoService.Remover(id);
+            _contatoService.Delete(id);
             Commit();
         }
 

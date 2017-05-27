@@ -20,7 +20,8 @@ namespace MvcAppExample.Infra.Data.Repositories
             var sql = @"SELECT * " +
                        "  FROM Contatos c " +
                        " LEFT JOIN Telefones t ON t.ContatoId = c.ContatoId" +
-                       " WHERE c.Ativo = 1 ";
+                       " WHERE c.Ativo = 1 " +
+                       " ORDER BY c.Nome, t.DDD, t.Numero ";
 
             var lookup = new Dictionary<Guid, Contato>();
             conn.Query<Contato, Telefone, Contato>(sql,
@@ -54,7 +55,8 @@ namespace MvcAppExample.Infra.Data.Repositories
             var sql = @"SELECT * " +
                        "  FROM Contatos c " +
                        " LEFT JOIN Telefones t ON t.ContatoId = c.ContatoId" +
-                       " WHERE c.ContatoId = @pid";
+                       " WHERE c.ContatoId = @pid" +
+                       " ORDER BY c.Nome, t.DDD, t.Numero ";
 
             var fones = new List<Telefone>();
             var contatos = conn.Query<Contato, Telefone, Contato>(sql,
@@ -78,7 +80,7 @@ namespace MvcAppExample.Infra.Data.Repositories
         {
             var conn = Db.Database.Connection;
 
-            var sql = @"SELECT * FROM Contatos";
+            var sql = @"SELECT * FROM Contatos ORDER BY Nome ";
 
             return conn.Query<Contato>(sql);
         }
