@@ -1,11 +1,12 @@
-﻿using MvcAppExample.Domain.Interfaces.Repositories;
+﻿using MvcAppExample.Domain.Entities;
+using MvcAppExample.Domain.Interfaces.Repositories;
 using MvcAppExample.Domain.Interfaces.Services;
 using System;
 using System.Collections.Generic;
 
 namespace MvcAppExample.Domain.Services
 {
-    public abstract class ServiceBase<TEntity, TRepository> : IServiceBase<TEntity> where TEntity : class where TRepository : IRepositoryBase<TEntity>
+    public abstract class ServiceBase<TEntity, TRepository> : IServiceBase<TEntity> where TEntity : EntityBase where TRepository : IRepositoryBase<TEntity>
     {
         protected TRepository _repository;
 

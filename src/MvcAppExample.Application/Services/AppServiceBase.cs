@@ -4,10 +4,11 @@ using MvcAppExample.Application.Interfaces;
 using MvcAppExample.Infra.Data;
 using AutoMapper;
 using MvcAppExample.Domain.Interfaces.Services;
+using MvcAppExample.Domain.Entities;
 
 namespace MvcAppExample.Application.Services
 {
-    public abstract class AppServiceBase<TEntity, TEntityViewModel, TService> : IAppServiceBase<TEntityViewModel> where TEntity : class where TEntityViewModel : class where TService : IServiceBase<TEntity>
+    public abstract class AppServiceBase<TEntity, TEntityViewModel, TService> : IAppServiceBase<TEntityViewModel> where TEntity : EntityBase where TEntityViewModel : class where TService : IServiceBase<TEntity>
     {
         readonly IUnitOfWork _uow;
         protected TService _service;
@@ -21,14 +22,20 @@ namespace MvcAppExample.Application.Services
         public virtual TEntityViewModel Add(TEntityViewModel entityViewModel)
         {
             var entity = _service.Add(Mapper.Map<TEntity>(entityViewModel));
-            Commit();
+
+            if (entity.ValidationResult.IsValid)
+                Commit();
+
             return Mapper.Map<TEntityViewModel>(entity);
         }
 
         public virtual TEntityViewModel Update(TEntityViewModel entityViewModel)
         {
             var entity = _service.Update(Mapper.Map<TEntity>(entityViewModel));
-            Commit();
+
+            if (entity.ValidationResult.IsValid)
+                Commit();
+
             return Mapper.Map<TEntityViewModel>(entity);
         }
 

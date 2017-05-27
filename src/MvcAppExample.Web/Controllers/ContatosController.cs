@@ -60,7 +60,10 @@ namespace MvcAppExample.Web.Controllers
             var contatoRetorno = _contatoAppService.Add(contatoViewModel);
 
             if (contatoRetorno.ValidationResult.IsValid)
+            {
+                ViewBag.MensagemSucesso = contatoRetorno.ValidationResult.Message; //Essa mensagem poderia ser exibida na tela para o usuário
                 return RedirectToAction("Index");
+            }
 
             contatoRetorno
                 .ValidationResult

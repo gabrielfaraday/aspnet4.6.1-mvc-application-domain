@@ -15,24 +15,14 @@ namespace MvcAppExample.Application.Services
         {
         }
 
-        public override ContatoViewModel Add(ContatoViewModel contatoViewModel)
+        public override ContatoViewModel Add(ContatoViewModel entityViewModel)
         {
-            var contato = _service.Add(Mapper.Map<Contato>(contatoViewModel));
+            var retorno = base.Add(entityViewModel);
 
-            if (contato.ValidationResult.IsValid)
-                Commit();
+            if (retorno.ValidationResult.IsValid)
+                retorno.ValidationResult.Message = "Contato criado com sucesso!";
 
-            return Mapper.Map<ContatoViewModel>(contato);
-        }
-
-        public override ContatoViewModel Update(ContatoViewModel contatoViewModel)
-        {
-            var contato = _service.Update(Mapper.Map<Contato>(contatoViewModel));
-
-            if (contato.ValidationResult.IsValid)
-                Commit();
-
-            return Mapper.Map<ContatoViewModel>(contato);
+            return retorno;
         }
 
         public IEnumerable<ContatoViewModel> ObterAtivos()

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MvcAppExample.Domain.Entities
 {
-    public class Contato
+    public class Contato : EntityBase
     {
         public Contato()
         {
@@ -18,7 +18,6 @@ namespace MvcAppExample.Domain.Entities
         public string Email { get; set; }
         public DateTime DataCadastro { get; set; }
         public bool Ativo { get; set; }
-        public ValidationResult ValidationResult { get; set; }
         public virtual ICollection<Telefone> Telefones { get; set; }
 
         public virtual bool Validar()

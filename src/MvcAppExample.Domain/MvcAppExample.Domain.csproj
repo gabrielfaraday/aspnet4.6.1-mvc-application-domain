@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Contato.cs" />
+    <Compile Include="Entities\EntityBase.cs" />
     <Compile Include="Entities\Telefone.cs" />
     <Compile Include="Interfaces\Repositories\IContatoRepository.cs" />
     <Compile Include="Interfaces\Repositories\ITelefoneRepository.cs" />

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MvcAppExample.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace MvcAppExample.Domain.Interfaces.Repositories
 {
-    public interface IRepositoryBase<TEntity> : IDisposable where TEntity : class
+    public interface IRepositoryBase<TEntity> : IDisposable where TEntity : EntityBase
     {
         TEntity Add(TEntity entity);
         void Delete(Guid id);

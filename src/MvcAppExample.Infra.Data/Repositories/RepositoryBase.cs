@@ -5,10 +5,11 @@ using MvcAppExample.Domain.Interfaces.Repositories;
 using MvcAppExample.Infra.Data.Contexts;
 using System.Data.Entity;
 using System.Linq;
+using MvcAppExample.Domain.Entities;
 
 namespace MvcAppExample.Infra.Data.Repositories
 {
-    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
+    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase
     {
         protected MainContext Db;
         protected DbSet<TEntity> DbSet;

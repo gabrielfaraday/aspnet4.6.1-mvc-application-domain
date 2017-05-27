@@ -1,9 +1,10 @@
-﻿using System;
+﻿using MvcAppExample.Domain.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace MvcAppExample.Domain.Interfaces.Services
 {
-    public interface IServiceBase<TEntity> : IDisposable where TEntity : class
+    public interface IServiceBase<TEntity> : IDisposable where TEntity : EntityBase
     {
         TEntity Add(TEntity entity);
         void Delete(Guid id);

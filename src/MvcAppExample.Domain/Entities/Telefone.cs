@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace MvcAppExample.Domain.Entities
 {
-    public class Telefone
+    public class Telefone : EntityBase
     {
         public Telefone()
         {
@@ -16,7 +16,6 @@ namespace MvcAppExample.Domain.Entities
         public int DDD { get; set; }
         public int Numero { get; set; }
         public Guid ContatoId { get; set; }
-        public ValidationResult ValidationResult { get; set; }
         public virtual Contato Contato { get; set; }
         
         public virtual bool Validar()
