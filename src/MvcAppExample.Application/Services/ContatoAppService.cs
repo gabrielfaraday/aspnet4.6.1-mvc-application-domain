@@ -15,9 +15,9 @@ namespace MvcAppExample.Application.Services
         {
         }
 
-        public override ContatoViewModel Add(ContatoViewModel entityViewModel)
+        public override ContatoViewModel Add(ContatoViewModel contatoViewModel)
         {
-            var retorno = base.Add(entityViewModel);
+            var retorno = base.Add(contatoViewModel);
 
             if (retorno.ValidationResult.IsValid)
                 retorno.ValidationResult.Message = "Contato criado com sucesso!";
