@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppExample.Infra.CrossCu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppExample.Services.REST.WebAPI", "src\MvcAppExample.Services.REST.WebAPI\MvcAppExample.Services.REST.WebAPI.csproj", "{EDB118DB-D888-4C97-8A84-F4BA9ADE9BA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAppExample.Infra.CrossCutting.AsyncServices", "src\MvcAppExample.Infra.CrossCutting.AsyncServices\MvcAppExample.Infra.CrossCutting.AsyncServices.csproj", "{94C37F68-355F-4C85-AB13-39180E09B5CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{EDB118DB-D888-4C97-8A84-F4BA9ADE9BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDB118DB-D888-4C97-8A84-F4BA9ADE9BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDB118DB-D888-4C97-8A84-F4BA9ADE9BA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94C37F68-355F-4C85-AB13-39180E09B5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94C37F68-355F-4C85-AB13-39180E09B5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94C37F68-355F-4C85-AB13-39180E09B5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94C37F68-355F-4C85-AB13-39180E09B5CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,5 +92,6 @@ Global
 		{C982FF8D-39FC-4E2B-B7DE-2E3BD555E2C4} = {D036DBC0-7BFE-472E-8F5F-E80B5B198498}
 		{5495DA39-6C71-4177-8F3F-BD9CA32571AC} = {D036DBC0-7BFE-472E-8F5F-E80B5B198498}
 		{EDB118DB-D888-4C97-8A84-F4BA9ADE9BA2} = {BF3F2AAE-FDD7-42C0-85D5-BAAE4BC42284}
+		{94C37F68-355F-4C85-AB13-39180E09B5CB} = {D036DBC0-7BFE-472E-8F5F-E80B5B198498}
 	EndGlobalSection
 EndGlobal
