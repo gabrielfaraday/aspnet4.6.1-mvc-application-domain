@@ -8,6 +8,7 @@ using System.Web.Http.Cors;
 namespace MvcAppExample.Services.REST.WebAPI.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api")]
     public class ContatosController : ApiController
     {
         IContatoAppService _contatoAppService;
@@ -17,27 +18,37 @@ namespace MvcAppExample.Services.REST.WebAPI.Controllers
             _contatoAppService = contatoAppService;
         }
 
-        public IEnumerable<ContatoViewModel> Get()
+        [HttpGet]
+        [Route("contatos")]
+        public IEnumerable<ContatoViewModel> ObterAtivos()
         {
-            return _contatoAppService.GetAll();
+            return _contatoAppService.ObterAtivos();
         }
 
-        public ContatoViewModel Get(Guid id)
+        [HttpGet]
+        [Route("contatos/{id:guid}")]
+        public ContatoViewModel ObterPorId(Guid id)
         {
             return _contatoAppService.FindById(id);
         }
 
-        public void Post([FromBody]ContatoViewModel contato)
+        [HttpPost]
+        [Route("contatos")]
+        public void Adicionar([FromBody]ContatoViewModel contato)
         {
             _contatoAppService.Add(contato);
         }
 
-        public void Put([FromBody]ContatoViewModel contato)
+        [HttpPut]
+        [Route("contatos")]
+        public void Atualizar([FromBody]ContatoViewModel contato)
         {
             _contatoAppService.Update(contato);
         }
 
-        public void Delete(Guid id)
+        [HttpDelete]
+        [Route("contatos")]
+        public void Remover(Guid id)
         {
             _contatoAppService.Delete(id);
         }
