@@ -1,9 +1,16 @@
-﻿using System.Web.Mvc;
+﻿using log4net;
+using MvcAppExample.Infra.CrossCutting.AsyncServices;
+using System;
+using System.Reflection;
+using System.Text;
+using System.Web.Mvc;
 
 namespace MvcAppExample.Infra.CrossCutting.MvcFilters
 {
     public class GlobalErrorHandler : ActionFilterAttribute
     {
+        static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             // MUITO CUIDADO AQUI - VOCÊ ESTÁ ENTRANDO NO MEIO DO PIPELINE DO ASP.NET, PODE IMPACTAR EM PERFORMANCE
@@ -20,7 +27,16 @@ namespace MvcAppExample.Infra.CrossCutting.MvcFilters
                 //  -> Email para o admin
                 //  -> Retornar cod de erro amigavel
 
-                filterContext.Controller.TempData["ErrorMessage"] = filterContext.Exception.Message;
+                var controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
+                var actionName = filterContext.ActionDescriptor.ActionName;
+                var userName = filterContext.HttpContext.User.Identity.Name.ToString();
+                var ex = filterContext.Exception;
+
+                var message = $"UserName= {userName} | Controller= {controllerName} | Action= {actionName} | Exceção= {ex.Message} | \r\n StackTrace= \r\n {ex.StackTrace}";
+
+                LoggingManager.ErrorLog(_logger, message);
+
+                filterContext.Controller.TempData["ErrorMessage"] = ex.Message;
             }
 
             base.OnActionExecuted(filterContext);

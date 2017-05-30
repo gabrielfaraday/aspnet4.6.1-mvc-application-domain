@@ -39,17 +39,17 @@ namespace MvcAppExample.Application.Services
             return Mapper.Map<TEntityViewModel>(entity);
         }
 
-        public TEntityViewModel FindById(Guid id)
+        public virtual TEntityViewModel FindById(Guid id)
         {
             return Mapper.Map<TEntityViewModel>(_service.FindById(id));
         }
 
-        public IEnumerable<TEntityViewModel> GetAll()
+        public virtual IEnumerable<TEntityViewModel> GetAll()
         {
             return Mapper.Map<IEnumerable<TEntityViewModel>>(_service.GetAll());
         }
 
-        public void Delete(Guid id)
+        public virtual void Delete(Guid id)
         {
             _service.Delete(id);
             Commit();

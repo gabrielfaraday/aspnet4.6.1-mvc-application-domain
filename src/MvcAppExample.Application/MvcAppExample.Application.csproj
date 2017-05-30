@@ -38,6 +38,10 @@
       <HintPath>..\..\packages\DomainValidation.1.0.0\lib\net451\DomainValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -67,6 +71,10 @@
     <ProjectReference Include="..\MvcAppExample.Domain\MvcAppExample.Domain.csproj">
       <Project>{6487A428-336D-4B1F-9800-127B982A312E}</Project>
       <Name>MvcAppExample.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcAppExample.Infra.CrossCutting.AsyncServices\MvcAppExample.Infra.CrossCutting.AsyncServices.csproj">
+      <Project>{94C37F68-355F-4C85-AB13-39180E09B5CB}</Project>
+      <Name>MvcAppExample.Infra.CrossCutting.AsyncServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcAppExample.Infra.Data\MvcAppExample.Infra.Data.csproj">
       <Project>{2F6F7AB5-EB90-4D6F-A6B6-1FC1B35E1E8C}</Project>

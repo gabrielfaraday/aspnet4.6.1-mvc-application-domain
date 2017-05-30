@@ -1,4 +1,5 @@
 ﻿using MvcAppExample.Application.AutoMapper;
+using System.IO;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -14,6 +15,8 @@ namespace MvcAppExample.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperConfig.RegisterMappings();
+
+            log4net.Config.XmlConfigurator.Configure(new FileInfo(Server.MapPath("~/log4net.config")));
         }
     }
 }
