@@ -1,15 +1,17 @@
 ﻿using log4net;
 using MvcAppExample.Infra.CrossCutting.AsyncServices;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
-using System.Web.Mvc;
+using System.Web.Http.Filters;
 
-namespace MvcAppExample.Infra.CrossCutting.MvcFilters
+namespace MvcAppExample.Infra.CrossCutting.WebAPIFilters
 {
     public class GlobalErrorHandler : ActionFilterAttribute
     {
         static readonly ILog _logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
             // MUITO CUIDADO AQUI - VOCÊ ESTÁ ENTRANDO NO MEIO DO PIPELINE DO ASP.NET, PODE IMPACTAR EM PERFORMANCE
             // FAÇA SEMPRE DE FORMA ASYNC
@@ -17,7 +19,7 @@ namespace MvcAppExample.Infra.CrossCutting.MvcFilters
 
             //TODO: aqui você pode fazer um log de auditoria --> Tal usuario gravou X info na model Y
 
-            if (filterContext.Exception != null)
+            if (actionExecutedContext.Exception != null)
             {
                 // TODO: Manipular a EX
                 // Injetar alguma LIB de tratamento de erro
@@ -25,19 +27,15 @@ namespace MvcAppExample.Infra.CrossCutting.MvcFilters
                 //  -> Email para o admin
                 //  -> Retornar cod de erro amigavel
 
-                var controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-                var actionName = filterContext.ActionDescriptor.ActionName;
-                var userName = filterContext.HttpContext.User.Identity.Name.ToString();
-                var ex = filterContext.Exception;
+                LoggingManager.ErrorLog(_logger, actionExecutedContext.Exception.Message);
 
-                var message = $"UserName= {userName} | Controller= {controllerName} | Action= {actionName} | Exceção= {ex.Message} | \r\n StackTrace= \r\n {ex.StackTrace}";
-
-                LoggingManager.ErrorLog(_logger, message);
-
-                filterContext.Controller.TempData["ErrorMessage"] = ex.Message;
+                actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(
+                    HttpStatusCode.BadRequest,
+                    new { error = "Ocorreu um erro! Tente novamente ou contate um administrador." },
+                    actionExecutedContext.ActionContext.ControllerContext.Configuration.Formatters.JsonFormatter);
             }
 
-            base.OnActionExecuted(filterContext);
+            base.OnActionExecuted(actionExecutedContext);
         }
     }
 }
