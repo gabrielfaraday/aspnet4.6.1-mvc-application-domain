@@ -182,7 +182,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorInitializer.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -196,9 +195,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PermissionHelper.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -284,6 +280,10 @@
     <ProjectReference Include="..\MvcAppExample.Application\MvcAppExample.Application.csproj">
       <Project>{3d51770a-b612-411b-85d5-95a53b15a3e5}</Project>
       <Name>MvcAppExample.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcAppExample.Infra.CrossCutting.Identity\MvcAppExample.Infra.CrossCutting.Identity.csproj">
+      <Project>{82F2CAE2-6219-462B-9C21-5EC58C6384AB}</Project>
+      <Name>MvcAppExample.Infra.CrossCutting.Identity</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcAppExample.Infra.CrossCutting.IoC\MvcAppExample.Infra.CrossCutting.IoC.csproj">
       <Project>{5495DA39-6C71-4177-8F3F-BD9CA32571AC}</Project>
