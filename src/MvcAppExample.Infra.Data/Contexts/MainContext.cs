@@ -15,6 +15,7 @@ namespace MvcAppExample.Infra.Data.Contexts
 
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Telefone> Telefones { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -34,6 +35,7 @@ namespace MvcAppExample.Infra.Data.Contexts
 
             modelBuilder.Configurations.Add(new ContatoConfig());
             modelBuilder.Configurations.Add(new TelefoneConfig());
+            modelBuilder.Configurations.Add(new UsuarioConfig());
 
             base.OnModelCreating(modelBuilder);
         }

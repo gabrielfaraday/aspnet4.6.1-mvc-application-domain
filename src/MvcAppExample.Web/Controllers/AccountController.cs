@@ -6,7 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MvcAppExample.Infra.CrossCutting.Identity.Configurations;
-using MvcAppExample.Infra.CrossCutting.Identity.Account.ViewModels;
+using MvcAppExample.Infra.CrossCutting.Identity.ViewModels.Account;
 using MvcAppExample.Infra.CrossCutting.Identity.Models;
 
 namespace MvcAppExample.Web.Controllers

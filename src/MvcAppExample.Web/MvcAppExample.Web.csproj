@@ -190,7 +190,9 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\TestarLogsController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,6 +267,14 @@
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\_ErrorSummary.cshtml" />
     <Content Include="Views\Contatos\NovoFone.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -280,6 +290,10 @@
     <ProjectReference Include="..\MvcAppExample.Application\MvcAppExample.Application.csproj">
       <Project>{3d51770a-b612-411b-85d5-95a53b15a3e5}</Project>
       <Name>MvcAppExample.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MvcAppExample.Domain\MvcAppExample.Domain.csproj">
+      <Project>{6487A428-336D-4B1F-9800-127B982A312E}</Project>
+      <Name>MvcAppExample.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcAppExample.Infra.CrossCutting.Identity\MvcAppExample.Infra.CrossCutting.Identity.csproj">
       <Project>{82F2CAE2-6219-462B-9C21-5EC58C6384AB}</Project>

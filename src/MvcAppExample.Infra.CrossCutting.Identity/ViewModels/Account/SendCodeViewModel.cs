@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace MvcAppExample.Infra.CrossCutting.Identity.Account.ViewModels
+namespace MvcAppExample.Infra.CrossCutting.Identity.ViewModels.Account
 {
     public class SendCodeViewModel
     {
