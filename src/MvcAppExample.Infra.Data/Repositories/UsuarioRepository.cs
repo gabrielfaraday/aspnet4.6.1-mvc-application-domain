@@ -25,6 +25,7 @@ namespace MvcAppExample.Infra.Data.Repositories
         {
             return _db.Usuarios.ToList();
         }
+
         public void DesativarLock(string id)
         {
             _db.Usuarios.Find(id).LockoutEnabled = false;
