@@ -291,10 +291,6 @@
       <Project>{3d51770a-b612-411b-85d5-95a53b15a3e5}</Project>
       <Name>MvcAppExample.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MvcAppExample.Domain\MvcAppExample.Domain.csproj">
-      <Project>{6487A428-336D-4B1F-9800-127B982A312E}</Project>
-      <Name>MvcAppExample.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvcAppExample.Infra.CrossCutting.Identity\MvcAppExample.Infra.CrossCutting.Identity.csproj">
       <Project>{82F2CAE2-6219-462B-9C21-5EC58C6384AB}</Project>
       <Name>MvcAppExample.Infra.CrossCutting.Identity</Name>

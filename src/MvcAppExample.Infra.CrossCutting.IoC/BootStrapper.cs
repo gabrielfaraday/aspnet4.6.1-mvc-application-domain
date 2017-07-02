@@ -21,9 +21,11 @@ namespace MvcAppExample.Infra.CrossCutting.IoC
         {
             //Application Layer
             container.Register<IContatoAppService, ContatoAppService>(Lifestyle.Scoped);
+            container.Register<IUsuarioAppService, UsuarioAppService>(Lifestyle.Scoped);
 
             //Domain Layer
             container.Register<IContatoService, ContatoService>(Lifestyle.Scoped);
+            container.Register<IUsuarioService, UsuarioService>(Lifestyle.Scoped);
 
             //Data Layer
             container.Register<IContatoRepository, ContatoRepository>(Lifestyle.Scoped);

@@ -58,12 +58,15 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="AutoMapper\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="Interfaces\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\IUsuarioAppService.cs" />
     <Compile Include="Interfaces\IContatoAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ContatoAppService.cs" />
     <Compile Include="Services\AppServiceBase.cs" />
+    <Compile Include="Services\UsuarioAppService.cs" />
     <Compile Include="ViewModels\ContatoViewModel.cs" />
     <Compile Include="ViewModels\TelefoneViewModel.cs" />
+    <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

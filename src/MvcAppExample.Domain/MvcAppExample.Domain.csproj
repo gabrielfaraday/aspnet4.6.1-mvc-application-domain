@@ -48,8 +48,10 @@
     <Compile Include="Interfaces\Repositories\IUsuarioRepository.cs" />
     <Compile Include="Interfaces\Services\IContatoService.cs" />
     <Compile Include="Interfaces\Services\IServiceBase.cs" />
+    <Compile Include="Interfaces\Services\IUsuarioService.cs" />
     <Compile Include="Services\ContatoService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\UsuarioService.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailUnicoSpecification.cs" />
     <Compile Include="Specifications\Contatos\ContatoPossuiEmailValidoSpecification.cs" />
     <Compile Include="Specifications\Telefones\TelefonePossuiDDDValidoSpecification.cs" />

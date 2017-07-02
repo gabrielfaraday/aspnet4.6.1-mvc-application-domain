@@ -1,4 +1,5 @@
-﻿using MvcAppExample.Domain.Interfaces.Repositories;
+﻿
+using MvcAppExample.Application.Interfaces;
 using System.Web.Mvc;
 
 namespace MvcAppExample.Web.Controllers
@@ -6,26 +7,26 @@ namespace MvcAppExample.Web.Controllers
     [Authorize]
     public class UsuariosController : Controller
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioAppService _usuarioAppService;
 
-        public UsuariosController(IUsuarioRepository usuarioRepository)
+        public UsuariosController(IUsuarioAppService usuarioAppService)
         {
-            _usuarioRepository = usuarioRepository;
+            _usuarioAppService = usuarioAppService;
         }
 
         public ActionResult Index()
         {
-            return View(_usuarioRepository.ObterTodos());
+            return View(_usuarioAppService.ObterTodos());
         }
 
         public ActionResult Details(string id)
         {
-            return View(_usuarioRepository.ObterPorId(id));
+            return View(_usuarioAppService.ObterPorId(id));
         }
 
         public ActionResult DesativarLock(string id)
         {
-            _usuarioRepository.DesativarLock(id);
+            _usuarioAppService.DesativarLock(id);
             return RedirectToAction("Index");
         }
     }

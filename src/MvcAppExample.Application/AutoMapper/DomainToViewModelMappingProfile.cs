@@ -10,6 +10,7 @@ namespace MvcAppExample.Application.AutoMapper
         {
             CreateMap<Contato, ContatoViewModel>();
             CreateMap<Telefone, TelefoneViewModel>();
+            CreateMap<Usuario, UsuarioViewModel>();
         }
     }
 }
