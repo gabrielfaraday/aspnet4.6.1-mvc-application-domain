@@ -1,4 +1,5 @@
-﻿using System.Web.Optimization;
+﻿using System.Collections.Generic;
+using System.Web.Optimization;
 
 namespace MvcAppExample.Web
 {
@@ -18,13 +19,27 @@ namespace MvcAppExample.Web
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            // Utilizando ordenação manual
+            var bootstrapBundle = new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js");
+            bootstrapBundle.Orderer = new AsIsBundleOrderer();
+            bundles.Add(bootstrapBundle);
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            // Utilizando ordenação manual
+            var cssBundle = new ScriptBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css");
+            cssBundle.Orderer = new AsIsBundleOrderer();
+            bundles.Add(cssBundle);
+        }
+    }
+
+    public class AsIsBundleOrderer : IBundleOrderer
+    {
+        public IEnumerable<BundleFile> OrderFiles(BundleContext context, IEnumerable<BundleFile> files)
+        {
+            return files;
         }
     }
 }
